@@ -1,11 +1,9 @@
 <h1 align="center">Social App API 👋</h1>
 
-> A porfolio Node.js/Graphql social app api.</br>Provides functionality for register/login, posts, likes and comments.
+<p align="center">A porfolio Node.js/Graphql social app api.</br>Provides functionality for register/login, posts, likes and comments.</p>
 </br></br>
 
 ## 🚀 Usage
-
-<details>
 
 1️⃣ Clone the repo:
 
@@ -25,12 +23,9 @@ npm install
 npm start
 ```
 
-</details>
-
 </br>
 
 ## 🧪 Test
-<details>
 
 Make sure you have jest installed globally:
 
@@ -43,17 +38,18 @@ Run Test:
 ```sh
 npm run test
 ```
-</details>
 
 </br>
 
 ## 👨 Author
-**Noam Kantor** 
+
+**Noam Kantor**
+
 - Github: [@Doise](https://github.com/Doise)
 
 </br>
 
-TODO 📝?
+## TODO 📝?
 
 - [ ] Write functionality for register/login/logout.
 - [ ] Write functionality for forgot password/edit user.
@@ -64,4 +60,5 @@ TODO 📝?
 </br>
 
 ## Issues 💦
+
 To be continued...
