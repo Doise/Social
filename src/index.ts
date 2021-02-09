@@ -1,12 +1,14 @@
-/**
- * @fileoverview The app entry point.
- * @author Noam Kantor
- */
+import { connect, connection, ConnectOptions } from "mongoose";
+import config from "./utils/config";
+import logger from "./utils/logger";
 
-/**
- * Saying hello.
- * @param {string} name - tell me what's your name.
- */
-export const helloWorld = (name: string): string => {
-    return `Hello ${name}`;
+const connectOptions: ConnectOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 };
+
+connect(config.databaseURL, connectOptions);
+connection.on("error", logger.error);
+connection.once("open", () => {
+    logger.info("Database is connected. 👍👍");
+});
