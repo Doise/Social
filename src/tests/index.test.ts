@@ -1,13 +1,8 @@
-import { JWT_LIFE_TIME, JWT_SECRET, MONGODB_URI, PORT } from "../utils/config";
-import { HelloWorld } from "../index";
+import config from "../utils/config";
 
 test("Enviroment configurations", () => {
-    expect(JWT_LIFE_TIME).toBeDefined();
-    expect(JWT_SECRET).toBeDefined();
-    expect(MONGODB_URI).toBeDefined();
-    expect(PORT).toBeDefined();
-});
-
-test("index.ts", () => {
-    expect(HelloWorld("Doise")).toBe("Hello Doise");
+    expect(config.jwrExpiration).toBeDefined();
+    expect(config.jwrSecret).toBeDefined();
+    expect(config.databaseURL).toBeDefined();
+    expect(config.port).toBeDefined();
 });

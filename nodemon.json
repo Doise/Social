@@ -1,6 +1,6 @@
 {
   "ignore": ["node_modules", ".git"],
   "watch": ["src", "tests", ".env"],
-  "exec": "npm test && npm start",
+  "exec": "npm run lint && npm start",
   "ext": "ts"
 }
