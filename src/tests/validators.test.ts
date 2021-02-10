@@ -1,4 +1,4 @@
-import { isEmail, isStrongPassword } from "../utils/validators";
+import { isEmail, isStrongPassword, isValidUsername } from "../utils/validators";
 
 test("Email is in valid format", () => {
     expect(isEmail("a.b.c@gmail.com")).toBe(true);
@@ -24,4 +24,17 @@ test("Password is strong", () => {
     expect(isStrongPassword("abcdef^^1234")).toBe(false);
     expect(isStrongPassword("^^^^^^^^")).toBe(false);
     expect(isStrongPassword("@123-123")).toBe(false);
+});
+
+test("Username is in valid format", () => {
+    expect(isValidUsername("abcdA123@")).toBe(true);
+    expect(isValidUsername("<>123😀4D")).toBe(true);
+    expect(isValidUsername("<>123😀dddddd4D")).toBe(true);
+    expect(isValidUsername("noamkantor123")).toBe(true);
+    expect(isValidUsername("no_am")).toBe(true);
+    expect(isValidUsername("no am")).toBe(false);
+    expect(isValidUsername("noam ")).toBe(false);
+    expect(isValidUsername(" noam")).toBe(false);
+    expect(isValidUsername("noamnoamnoamnoamnoamnoamnoamnoamX")).toBe(false);
+    expect(isValidUsername("123456")).toBe(false);
 });
