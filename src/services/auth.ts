@@ -50,7 +50,7 @@ export const registerUser = async (registerInput: ICreateUserInput): Promise<ILo
     /**
      * validate username.
      */
-    if (registerInput.username.length < 4) throw new Error("Passwor must be at least 4 characters.");
+    if (registerInput.username.length < 4) throw new Error("Username must be at least 4 characters.");
 
     /**
      * validate password.
@@ -80,13 +80,27 @@ export const registerUser = async (registerInput: ICreateUserInput): Promise<ILo
          * save the user in the database.
          */
         const user = new User(doc);
-        user.save();
+        await user.save();
 
         return {
             user,
             token: getAuthToken(user),
         };
     } catch (error) {
+        /**
+         * throw a duplicate email error.
+         */
+        if (error.message && `${error.message}`.includes("email_1 dup key:")) {
+            throw new Error("Email address is already exists");
+        }
+
+        /**
+         * throw a duplicate username error.
+         */
+        if (error.message && `${error.message}`.includes("username_1 dup key:")) {
+            throw new Error("Username is already exists");
+        }
+
         /**
          * may be that mongoose or bcrypt are throwing..
          */
