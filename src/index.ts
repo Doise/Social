@@ -5,6 +5,7 @@ import logger from "./utils/logger";
 const connectOptions: ConnectOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
 };
 
 connect(config.databaseURL, connectOptions);
