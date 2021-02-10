@@ -21,6 +21,21 @@ export const isEmail = (email: string): boolean => {
  * @returns { boolean } True if the password is valid.
  */
 export const isStrongPassword = (password: string): boolean => {
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/g;
     return regex.test(password);
+};
+
+/**
+ * Checks if a username is valid.
+ * A valid username may contains > 4 && < 32 characters.
+ * A username cannot contain spaces.
+ *
+ * @param { string } username The username to validate.
+ * @returns { boolean } True if the username is valid.
+ */
+export const isValidUsername = (username: string): boolean => {
+    const regex = /^(?=.*[a-zA-Z])(?=.*[a-zA-Z0-9]).{4,32}$/gu;
+    const whitespaceRegex = /^\S+$/;
+
+    return regex.test(username) && whitespaceRegex.test(username);
 };
