@@ -1,4 +1,6 @@
-export interface IUser {
+import { Document } from "mongoose";
+
+export interface IUser extends Document {
     id: string;
     username: string;
     email: string;
@@ -10,6 +12,14 @@ export interface ICreateUserInput {
     username: IUser["username"];
     email: IUser["email"];
     password: IUser["password"];
+}
+
+export interface IUpdateUserInput {
+    token: string;
+    username?: IUser["username"];
+    email?: IUser["email"];
+    password?: IUser["password"];
+    status?: IUser["status"];
 }
 
 export interface ILoginUserInput {
