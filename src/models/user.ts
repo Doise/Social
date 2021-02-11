@@ -1,4 +1,4 @@
-import { Schema, model, SchemaOptions, Document } from "mongoose";
+import { Schema, model, SchemaOptions } from "mongoose";
 import { IUser } from "../interfaces/IUser";
 
 const schemaOptions: SchemaOptions = {
@@ -28,4 +28,4 @@ const userSchema = new Schema(
     schemaOptions,
 );
 
-export default model<IUser & Document>("User", userSchema);
+export default model<IUser>("User", userSchema);
