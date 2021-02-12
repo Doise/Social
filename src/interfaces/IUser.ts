@@ -12,6 +12,7 @@ export interface ICreateUserInput {
     username: IUser["username"];
     email: IUser["email"];
     password: IUser["password"];
+    status?: IUser["status"];
 }
 
 export interface IUpdateUserInput {
