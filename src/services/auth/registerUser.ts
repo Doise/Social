@@ -44,13 +44,13 @@ export default async (registerInput: ICreateUserInput): Promise<ILoginUserResult
             email: registerInput.email,
             username: registerInput.username,
             password: hashPassword,
+            status: registerInput.status ? registerInput.status : "",
         };
 
         /**
          * save the user in the database.
          */
-        const user = new User(doc);
-        await user.save();
+        const user = await new User(doc).save();
 
         return {
             user,
@@ -74,7 +74,7 @@ export default async (registerInput: ICreateUserInput): Promise<ILoginUserResult
         /**
          * may be that mongoose or bcrypt are throwing..
          */
-        Logger.error(`auth.registerUser => ${error.message}`);
-        throw new Error(`Failed to register user: ${error.message}`);
+        Logger.error(`auth.registerUser => ${error}`);
+        throw new Error(`Error: Failed to register user: ${error.message}`);
     }
 };
