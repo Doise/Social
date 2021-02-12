@@ -26,11 +26,6 @@ export default {
     databaseURL: process.env.MONGODB_URI,
 
     /**
-     * bcryptjs salt
-     */
-    bcryptSecret: process.env.BCRYPT_SECRET,
-
-    /**
      * token expiration
      */
     jwrExpiration: process.env.JWT_LIFE_TIME,
