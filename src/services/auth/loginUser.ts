@@ -19,14 +19,24 @@ export default async (loginUserInput: ILoginUserInput): Promise<ILoginUserResult
         /**
          * find the user by his identity (username or email).
          */
+        // const user = await User.findOne({ email: loginUserInput.identity });
         const user = await User.findOne({
             $or: [{ email: loginUserInput.identity }, { username: loginUserInput.identity }],
         });
 
         /**
+         * this username is not signed up.
+         */
+        if (!user) {
+            throw new Error("Bad username/password, login failed.");
+        }
+
+        /**
          * compare the password with the stored hash.
          */
-        if (!user || !compare(loginUserInput.password, user.password)) {
+        const isPasswordEquals = await compare(loginUserInput.password, user.password);
+
+        if (!isPasswordEquals) {
             throw new Error("Bad username/password, login failed.");
         }
 
@@ -41,7 +51,7 @@ export default async (loginUserInput: ILoginUserInput): Promise<ILoginUserResult
         /**
          * may be that mongoose or bcrypt are throwing..
          */
-        Logger.error(`auth.registerUser => ${error.message}`);
-        throw new Error(`Failed to register user: ${error.message}`);
+        Logger.error(`auth.loginUser => ${error}`);
+        throw new Error(error.message);
     }
 };
