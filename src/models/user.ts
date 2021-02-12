@@ -1,27 +1,27 @@
 import { Schema, model, SchemaOptions } from "mongoose";
 import { IUser } from "../interfaces/IUser";
 
-const schemaOptions: SchemaOptions = {
-    timestamps: true,
-};
+const schemaOptions: SchemaOptions = { timestamps: true };
 
 const userSchema = new Schema(
     {
         username: {
             type: String,
-            required: [true, "Please enter a user name"],
+            required: true,
             unique: true,
-            index: true,
         },
 
         email: {
             type: String,
-            lowercase: true,
+            required: true,
             unique: true,
-            index: true,
+            lowercase: true,
         },
 
-        password: String, // hashed password
+        password: {
+            type: String,
+            required: true,
+        },
 
         status: String,
     },
