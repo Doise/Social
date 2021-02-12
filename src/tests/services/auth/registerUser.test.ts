@@ -1,38 +1,8 @@
-import { connect, connection, ConnectOptions } from "mongoose";
-import User from "../models/user";
-import config from "../utils/config";
-import logger from "../utils/logger";
-import { ICreateUserInput } from "../interfaces/IUser";
-import { registerUser } from "../services/auth";
+import { ICreateUserInput } from "../../../interfaces/IUser";
+import { registerUser } from "../../../services/auth";
+import setupUsersDatabase from "./setup";
 
-beforeAll(async () => {
-    jest.setTimeout(20_000);
-
-    const connectOptions: ConnectOptions = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-    };
-
-    await connect(config.databaseURL, connectOptions);
-
-    connection.useDb("testDatabase");
-
-    connection.on("error", logger.error);
-
-    connection.once("open", () => {
-        logger.info("Database is connected. 👍👍");
-    });
-});
-
-afterAll(async () => {
-    await User.collection.drop();
-    await connection.close();
-});
-
-afterEach(async () => {
-    await User.deleteMany().exec();
-});
+setupUsersDatabase("testDatabase");
 
 test("Register user shoud throw email exception.", async () => {
     const userInput: ICreateUserInput = {
@@ -94,23 +64,24 @@ test("Register with the same email twice shoud throw an error.", async () => {
         password: "tesT$1234",
     };
 
-    await expect(registerUser(userInput)).resolves.toBeTruthy();
+    await registerUser(userInput);
     await expect(registerUser(copycatUserInput)).rejects.toThrow(/(Email address is already exists)/);
 });
 
 test("Register with the same username twice shoud throw an error.", async () => {
-    const userInput: ICreateUserInput = {
+    const user1: ICreateUserInput = {
         email: "email@gmail.com",
         username: "sameusername",
         password: "tesT$1234",
     };
 
-    const copycatUserInput: ICreateUserInput = {
+    const user2: ICreateUserInput = {
         email: "different-email@gmail.com",
         username: "sameusername",
         password: "tesT$1234",
     };
 
-    await expect(registerUser(userInput)).resolves.toBeTruthy();
-    await expect(registerUser(copycatUserInput)).rejects.toThrow(/(Username is already exists)/);
+    await registerUser(user1);
+    const user = registerUser(user2);
+    await expect(user).rejects.toThrow(/(Username is already exists)/);
 });

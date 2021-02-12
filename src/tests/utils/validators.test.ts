@@ -1,4 +1,4 @@
-import { isEmail, isStrongPassword, isValidUsername } from "../utils/validators";
+import { isEmail, isStrongPassword, isValidUsername } from "../../utils/validators";
 
 test("Email is in valid format", () => {
     expect(isEmail("a.b.c@gmail.com")).toBe(true);
