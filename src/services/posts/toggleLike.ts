@@ -1,6 +1,5 @@
 import { IToggleLikeInput } from "../../interfaces/IPost";
 import Post from "../../models/post";
-import logger from "../../utils/logger";
 
 /**
  * Toggles like/dislike for a post from a given user.
@@ -19,7 +18,6 @@ export default async (toggleLikeInput: IToggleLikeInput): Promise<void> => {
          * chek if the user already liked it or not
          */
         const likeIndex = post.likes.findIndex(user => `${user}` === `${toggleLikeInput.userId}`);
-        logger.info(post.likes);
 
         /**
          * update the likes array and save the doc.

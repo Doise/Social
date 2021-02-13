@@ -11,7 +11,7 @@ export default (databaseName: string): void => {
             useCreateIndex: true,
         };
 
-        await connect(config.databaseURL.replace("<dbname>", databaseName), connectOptions);
+        await connect(config.databaseURL.replace("social", databaseName), connectOptions);
     }, 20_000);
 
     afterAll(async () => {
