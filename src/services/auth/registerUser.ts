@@ -1,18 +1,17 @@
-import Logger from "../../utils/logger";
 import User from "../../models/user";
 
-import { ILoginUserResult, ICreateUserInput } from "../../interfaces/IUser";
+import { IUserResult, ICreateUserInput } from "../../interfaces/IUser";
 import { isEmail, isStrongPassword, isValidUsername } from "../../utils/validators";
-import { createHashedPassword, getAuthToken } from "./auth";
+import { createHashedPassword, serializeUser } from "./auth";
 
 /**
  * Registers new user.
  * Constructs a new user in the database and generates a token.
  *
  * @param { ICreateUserInput } registerInput User properties to construct a user from.
- * @returns { Promise<ILoginUserResult> } The user that created and a fresh generated json web token.
+ * @returns { Promise<IUserResult> } The user that created and a fresh generated json web token.
  */
-export default async (registerInput: ICreateUserInput): Promise<ILoginUserResult> => {
+export default async (registerInput: ICreateUserInput): Promise<IUserResult> => {
     /**
      * validate email.
      */
@@ -54,7 +53,8 @@ export default async (registerInput: ICreateUserInput): Promise<ILoginUserResult
 
         return {
             user,
-            token: getAuthToken(user),
+            /* eslint no-underscore-dangle: "off" */
+            token: serializeUser(user._id),
         };
     } catch (error) {
         /**
@@ -74,7 +74,6 @@ export default async (registerInput: ICreateUserInput): Promise<ILoginUserResult
         /**
          * may be that mongoose or bcrypt are throwing..
          */
-        Logger.error(`auth.registerUser => ${error}`);
         throw new Error(`Error: Failed to register user: ${error.message}`);
     }
 };

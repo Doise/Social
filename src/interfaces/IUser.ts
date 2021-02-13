@@ -1,34 +1,39 @@
 import { Document } from "mongoose";
 
-export interface IUser extends Document {
-    id: string;
+export interface IUserBase extends Document {
     username: string;
     email: string;
     password: string;
     status: string;
 }
 
+export interface IUser {
+    username: IUserBase["username"];
+    email: IUserBase["email"];
+    status: IUserBase["status"];
+}
+
 export interface ICreateUserInput {
-    username: IUser["username"];
-    email: IUser["email"];
-    password: IUser["password"];
-    status?: IUser["status"];
+    username: IUserBase["username"];
+    email: IUserBase["email"];
+    password: IUserBase["password"];
+    status?: IUserBase["status"];
 }
 
 export interface IUpdateUserInput {
     token: string;
-    username?: IUser["username"];
-    email?: IUser["email"];
-    password?: IUser["password"];
-    status?: IUser["status"];
+    username?: IUserBase["username"];
+    email?: IUserBase["email"];
+    password?: IUserBase["password"];
+    status?: IUserBase["status"];
 }
 
 export interface ILoginUserInput {
-    identity: IUser["email"] | IUser["username"];
-    password: IUser["password"];
+    identity: IUserBase["email"] | IUserBase["username"];
+    password: IUserBase["password"];
 }
 
-export interface ILoginUserResult {
+export interface IUserResult {
     user: IUser;
     token: string;
 }

@@ -1,20 +1,16 @@
 import { compare } from "bcryptjs";
-
-import Logger from "../../utils/logger";
 import User from "../../models/user";
 
-import { ILoginUserResult, ILoginUserInput } from "../../interfaces/IUser";
-import { getAuthToken } from "./auth";
+import { ILoginUserInput, IUserResult } from "../../interfaces/IUser";
+import { serializeUser } from "./auth";
 
 /**
  * Generates a fresh jsonwebtoken for a given user.
  *
- * @todo not tested yet
- *
  * @param { ILoginUserInput } loginUserInput The user identity (username/email) and the password.
- * @returns { Promise<ILoginUserResult> } The requested user and a fresh generated json web token.
+ * @returns { Promise<IUserResult> } The requested user and a fresh generated json web token.
  */
-export default async (loginUserInput: ILoginUserInput): Promise<ILoginUserResult> => {
+export default async (loginUserInput: ILoginUserInput): Promise<IUserResult> => {
     try {
         /**
          * find the user by his identity (username or email).
@@ -45,13 +41,13 @@ export default async (loginUserInput: ILoginUserInput): Promise<ILoginUserResult
          */
         return {
             user,
-            token: getAuthToken(user),
+            /* eslint no-underscore-dangle: "off" */
+            token: serializeUser(user._id),
         };
     } catch (error) {
         /**
          * may be that mongoose or bcrypt are throwing..
          */
-        Logger.error(`auth.loginUser => ${error}`);
         throw new Error(error.message);
     }
 };
