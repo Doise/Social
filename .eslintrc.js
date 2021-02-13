@@ -85,6 +85,9 @@ module.exports = {
                     "validate",
                     "verify",
                     "warn",
+                    "login",
+                    "serialize",
+                    "deserialize"
                 ],
             },
         ],
