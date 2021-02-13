@@ -87,7 +87,8 @@ module.exports = {
                     "warn",
                     "login",
                     "serialize",
-                    "deserialize"
+                    "deserialize",
+                    "toggle"
                 ],
             },
         ],

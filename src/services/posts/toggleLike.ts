@@ -2,6 +2,12 @@ import { IToggleLikeInput } from "../../interfaces/IPost";
 import Post from "../../models/post";
 import logger from "../../utils/logger";
 
+/**
+ * Toggles like/dislike for a post from a given user.
+ * 
+ * @param { IToggleLikeInput } toggleLikeInput The user and the post to be liked.
+ * @returns { Promise<void> } 
+ */
 export default async (toggleLikeInput: IToggleLikeInput): Promise<void> => {
     try {
         /**
