@@ -6,7 +6,7 @@
     "scripts": {
         "start": "ts-node src/index.ts",
         "dev": "nodemon --config ./nodemon.json",
-        "test": "jest",
+        "test": "jest --coverage --runInBand",
         "lint": "eslint . --ext .ts,.tsx"
     },
     "repository": {
