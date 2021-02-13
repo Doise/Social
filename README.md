@@ -51,9 +51,10 @@ npm run test
 
 ## TODO 📝?
 
-- [ ] Write functionality for register/login/logout.
-- [ ] Write functionality for forgot password/edit user.
-- [ ] Write functionality for posting a post/like/comment.
+- [x] Write functionality for register/login/logout.
+- [x] Write functionality for edit user.
+- [x] Write functionality for posting a post/like.
+- [ ] Write functionality for forgot password.
 - [ ] Wrap it with graphql.
 - [ ] Test it.
 

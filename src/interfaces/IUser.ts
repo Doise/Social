@@ -8,6 +8,7 @@ export interface IUserBase extends Document {
 }
 
 export interface IUser {
+    id: IUserBase["_id"]
     username: IUserBase["username"];
     email: IUserBase["email"];
     status: IUserBase["status"];
