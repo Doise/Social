@@ -1,17 +1,11 @@
-import { connect, connection, ConnectOptions } from "mongoose";
+import { connection } from "mongoose";
 import Post from "../../../models/post";
 import User from "../../../models/user";
-import config from "../../../utils/config";
+import { mountDatabase } from "../../../utils/server";
 
 export default (databaseName: string): void => {
     beforeAll(async () => {
-        const connectOptions: ConnectOptions = {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-        };
-
-        await connect(config.databaseURL.replace("social", databaseName), connectOptions);
+        await mountDatabase(databaseName);
     }, 20_000);
 
     afterAll(async () => {

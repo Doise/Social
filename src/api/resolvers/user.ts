@@ -12,6 +12,7 @@ const resolver = {
             }
         },
     },
+
     Mutation: {
         /**
          * Constructs a new user in the database and generates a token.
