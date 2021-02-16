@@ -23,40 +23,17 @@ export default gql`
         status: String!
     }
 
-    extend type Query {
-        """
-        get user by id
-        """
-        user(userId: String!): User!
-    }
-
-    extend type Mutation {
-        """
-        Constructs a new user in the database and generates a token.
-        """
-        createUser(createUserInput: CreateUserInput!): UserResult!
-
-        """
-        Generates a fresh jsonwebtoken for a given user.
-        """
-        loginUser(loginUserInput: LoginUserInput): UserResult!
-
-        """
-        Updates a registered user.
-        """
-        updateUser(updateUserInput: UpdateUserInput!): UserResult!
-
-        # """
-        # Generates a fresh jsonwebtoken from a token.
-        # """
-        # refreshToken(token: String!): UserResult!
-    }
-
+    """
+    Result message contains the returned user and a token.
+    """
     type UserResult {
         user: User!
         token: String!
     }
 
+    """
+    Input for constructing a new user.
+    """
     input CreateUserInput {
         username: String!
         password: String!
@@ -64,11 +41,17 @@ export default gql`
         status: String
     }
 
+    """
+    Input for login.
+    """
     input LoginUserInput {
         identity: String!
         password: String!
     }
 
+    """
+    Input for user fields update.
+    """
     input UpdateUserInput {
         token: String!
         username: String
