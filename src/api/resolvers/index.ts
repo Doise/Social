@@ -1,11 +1,14 @@
-import userResolver from "./user";
+import userQueries from "./user/queries";
+import postQueries from "./post/queries";
+import userMutations from "./user/mutations";
 
 export default {
     Query: {
-        ...userResolver.Query,
+        ...userQueries,
+        ...postQueries,
     },
     Mutation: {
-        ...userResolver.Mutation,
+        ...userMutations,
     },
     // Subscription: {},
 };

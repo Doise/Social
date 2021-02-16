@@ -2,6 +2,8 @@ import { gql } from "apollo-server";
 import userMutatuin from "./user/mutations";
 import userQuery from "./user/queries";
 import userTypeDefs from "./user/typeDefs";
+import postQuery from "./post/queries";
+import postTypeDefs from "./post/typeDefs";
 
 const baseTypeDef = gql`
     type Query
@@ -11,4 +13,4 @@ const baseTypeDef = gql`
     # type Subscription
 `;
 
-export default [baseTypeDef, userTypeDefs, userQuery, userMutatuin];
+export default [baseTypeDef, userTypeDefs, userQuery, userMutatuin, postTypeDefs, postQuery];

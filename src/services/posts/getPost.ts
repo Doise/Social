@@ -8,7 +8,7 @@ import Post from "../../models/post";
  * @param { ObjectId } postId The post id.
  * @returns { Promise<IPost> } The post, false value if not found.
  */
-export const getPost = async (postId: ObjectId): Promise<IPost> => {
+export const getPost = async (postId: ObjectId | string): Promise<IPost> => {
     const post = await Post.findById(postId).populate("author", "-password").populate("likes", "-password");
     return (post as unknown) as IPost;
 };

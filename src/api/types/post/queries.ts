@@ -3,8 +3,8 @@ import { gql } from "apollo-server";
 export default gql`
     extend type Query {
         """
-        get user by id
+        get post by id
         """
-        user(userId: String!): User
+        post(postId: String!): Post
     }
 `;

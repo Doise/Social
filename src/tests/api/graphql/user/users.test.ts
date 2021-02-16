@@ -1,8 +1,8 @@
 import { createTestClient } from "apollo-server-testing";
-import { ICreateUserInput, IUser } from "../../../interfaces/IUser";
-import registerUser from "../../../services/auth/registerUser";
-import { getServer } from "../../../utils/server";
-import setupUsersDatabase from "../../services/auth/setup";
+import { ICreateUserInput, IUser } from "../../../../interfaces/IUser";
+import registerUser from "../../../../services/auth/registerUser";
+import { getServer } from "../../../../utils/server";
+import setupUsersDatabase from "../../../services/auth/setup";
 import { CREATE_USER, GET_USER, LOGIN_USER, UPDATE_USER } from "./queries";
 
 setupUsersDatabase("testDatabase");
