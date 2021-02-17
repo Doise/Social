@@ -1,13 +1,13 @@
-import { IToggleLikeInput } from "../../interfaces/IPost";
+import { IPost, IToggleLikeInput } from "../../interfaces/IPost";
 import Post from "../../models/post";
 
 /**
  * Toggles like/dislike for a post from a given user.
- * 
+ *
  * @param { IToggleLikeInput } toggleLikeInput The user and the post to be liked.
- * @returns { Promise<void> } 
+ * @returns { Promise<IPost> } The post liked.
  */
-export default async (toggleLikeInput: IToggleLikeInput): Promise<void> => {
+export default async (toggleLikeInput: IToggleLikeInput): Promise<IPost> => {
     try {
         /**
          * find the post to toggle like.
@@ -29,6 +29,7 @@ export default async (toggleLikeInput: IToggleLikeInput): Promise<void> => {
         }
 
         await post.save();
+        return (post.populate("author", "-password").populate("likes", "-password") as unknown) as IPost;
     } catch (e) {
         throw new Error("Post not found");
     }

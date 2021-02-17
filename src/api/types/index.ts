@@ -3,6 +3,7 @@ import userMutatuin from "./user/mutations";
 import userQuery from "./user/queries";
 import userTypeDefs from "./user/typeDefs";
 import postQuery from "./post/queries";
+import postMutation from "./post/mutations";
 import postTypeDefs from "./post/typeDefs";
 
 const baseTypeDef = gql`
@@ -13,4 +14,4 @@ const baseTypeDef = gql`
     # type Subscription
 `;
 
-export default [baseTypeDef, userTypeDefs, userQuery, userMutatuin, postTypeDefs, postQuery];
+export default [baseTypeDef, userTypeDefs, userQuery, userMutatuin, postTypeDefs, postQuery, postMutation];

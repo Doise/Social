@@ -1,6 +1,7 @@
 import userQueries from "./user/queries";
 import postQueries from "./post/queries";
 import userMutations from "./user/mutations";
+import postMutations from "./post/mutations";
 
 export default {
     Query: {
@@ -9,6 +10,7 @@ export default {
     },
     Mutation: {
         ...userMutations,
+        ...postMutations,
     },
     // Subscription: {},
 };
