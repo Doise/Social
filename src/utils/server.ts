@@ -34,7 +34,7 @@ export const getServer = (): ApolloServer => {
 export const createServer = async (): Promise<void> => {
     const server = getServer();
 
-    const { url, subscriptionsUrl } = await server.listen();
+    const { url, subscriptionsUrl } = await server.listen({ port: config.port });
 
     logger.info(`Server ready at ${url}`);
     logger.info(`Subscriptions ready at ${subscriptionsUrl}`);

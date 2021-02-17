@@ -14,7 +14,7 @@ export default {
     /**
      * favorite port
      */
-    port: process.env.PORT,
+    port: process.env.PORT || 5000,
 
     /**
      * mongodb atlas connection string
