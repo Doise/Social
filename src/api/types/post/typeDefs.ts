@@ -34,7 +34,15 @@ export default gql`
     input CreatePostInput {
         title: String!
         body: String!
+
+        """
+        user id of the author.
+        """
         author: ID!
+
+        """
+        array of user ids that liked this post.
+        """
         likes: [ID!]
     }
 

@@ -1,5 +1,6 @@
 import { connection } from "mongoose";
 import user from "../../../models/user";
+import post from "../../../models/post";
 import { mountDatabase } from "../../../utils/server";
 
 export default (databaseName: string): void => {
@@ -9,6 +10,7 @@ export default (databaseName: string): void => {
 
     afterAll(async () => {
         await user.deleteMany();
+        await post.deleteMany();
         await connection.close();
     });
 };

@@ -3,11 +3,7 @@ import { config } from "dotenv";
 // Set the NODE_ENV to 'development' by default
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
-const envFound = config();
-if (envFound.error) {
-    // This error should crash whole process
-    throw new Error("⚠️  Couldn't find .env file  ⚠️");
-}
+config();
 
 export default {
     /**
@@ -18,7 +14,7 @@ export default {
     /**
      * favorite port
      */
-    port: process.env.PORT,
+    port: process.env.PORT || 5000,
 
     /**
      * mongodb atlas connection string
@@ -34,4 +30,14 @@ export default {
      * token secret key
      */
     jwrSecret: process.env.JWT_SECRET,
+
+    /**
+     * nodemailer username
+     */
+    mailUser: process.env.MAIL_USER,
+
+    /**
+     * nodemailer secret
+     */
+    mailSecret: process.env.MAIL_SECRET,
 };

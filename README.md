@@ -45,18 +45,20 @@ npm run test
 
 **Noam Kantor**
 
-- Github: [@Doise](https://github.com/Doise)
+-   Github: [@Doise](https://github.com/Doise)
 
 </br>
 
 ## TODO 📝?
 
-- [x] Write functionality for register/login/logout.
-- [x] Write functionality for edit user.
-- [x] Write functionality for posting a post/like.
-- [ ] Write functionality for forgot password.
-- [ ] Wrap it with graphql.
-- [ ] Test it.
+-   [x] Write functionality for register/login/logout.
+-   [x] Write functionality for edit user.
+-   [x] Write functionality for posting a post/like.
+-   [x] Write functionality for forgot password.
+-   [x] Wrap it with graphql.
+-   [x] Test it.
+
+-   [ ] Add functionality to comments on posts.
 
 </br>
 
