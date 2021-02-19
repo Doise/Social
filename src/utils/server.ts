@@ -26,6 +26,8 @@ export const getServer = (): ApolloServer => {
         context: {
             pubsub: new PubSub(),
         },
+        introspection: true,
+        playground: true,
     };
 
     return new ApolloServer(serverConfig);
