@@ -1,9 +1,10 @@
-import { ApolloServer, Config, PubSub } from "apollo-server";
+import { ApolloServer, Config } from "apollo-server";
 import { connect, ConnectOptions } from "mongoose";
 import logger from "./logger";
 import typeDefs from "../api/types";
 import resolvers from "../api/resolvers";
 import config from "./config";
+import { deserializeUser } from "../services/auth/auth";
 
 export const mountDatabase = async (databaseName?: string): Promise<void> => {
     const connectOptions: ConnectOptions = {
@@ -19,12 +20,27 @@ export const mountDatabase = async (databaseName?: string): Promise<void> => {
     logger.info("Database is connected.");
 };
 
-export const getServer = (): ApolloServer => {
+export const getServer = (auth? : string): ApolloServer => {
     const serverConfig: Config = {
         typeDefs,
         resolvers,
-        context: {
-            pubsub: new PubSub(),
+        context: async ({ req }) => {
+            let token = req?.headers?.authorization || auth;
+
+            logger.info(token);
+
+            if (!token) {
+                return { user: null };
+            }
+
+            [, token] = token.split(" ");
+
+            try {
+                const user = await deserializeUser(token);
+                return { user };
+            } catch (e) {
+                return { user: null };
+            }
         },
         introspection: true,
         playground: true,

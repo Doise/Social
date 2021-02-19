@@ -5,7 +5,7 @@ export default gql`
         """
         Creates a post.
         """
-        createPost(createPostInput: CreatePostInput!): Post
+        createPost(title: String!, body: String!): Post
 
         """
         Removes a specific post.
@@ -15,6 +15,6 @@ export default gql`
         """
         Toggles like/dislike for a post from a given user.
         """
-        toggleLike(toggleLikeInput: ToggleLikeInput!): Post
+        toggleLike(postId: String!): Post
     }
 `;

@@ -12,7 +12,7 @@ setupUsersDatabase("testDatabase");
 
 describe("graphql.post", () => {
     let user: IUser;
-    // let token: string;
+    let token: string;
     let postId: string;
 
     beforeAll(async () => {
@@ -24,7 +24,7 @@ describe("graphql.post", () => {
 
         const result = await registerUser(userInput);
         user = result.user;
-        // token = result.token;
+        token = result.token;
 
         const postInput: ICreatePostInput = {
             author: user.id,
@@ -38,19 +38,15 @@ describe("graphql.post", () => {
     });
 
     it("shoult create a post", async () => {
-        const server = getServer();
+        const server = getServer(`Barear ${token}`);
 
         const { mutate } = createTestClient(server);
 
         const { data } = await mutate({
             mutation: CREATE_POST,
             variables: {
-                createPostInput: {
-                    title: "test post",
-                    body: "test body post",
-                    author: user.id,
-                    likes: [],
-                },
+                title: "test post",
+                body: "test body post",
             },
         });
 
@@ -60,7 +56,7 @@ describe("graphql.post", () => {
     });
 
     it("sould return a post", async () => {
-        const server = getServer();
+        const server = getServer(`Barear ${token}`);
 
         const { query } = createTestClient(server);
 
@@ -75,17 +71,14 @@ describe("graphql.post", () => {
     });
 
     it("sould toggle like", async () => {
-        const server = getServer();
+        const server = getServer(`Barear ${token}`);
 
         const { mutate } = createTestClient(server);
 
         const { errors } = await mutate({
             mutation: TOGGLE_LIKE,
             variables: {
-                toggleLikeInput: {
-                    userId: user.id,
-                    postId,
-                },
+                postId,
             },
         });
 
@@ -103,7 +96,7 @@ describe("graphql.post", () => {
     });
 
     it("sould delete a post", async () => {
-        const server = getServer();
+        const server = getServer(`Barear ${token}`);
 
         const { mutate } = createTestClient(server);
 

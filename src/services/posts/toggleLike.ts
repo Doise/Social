@@ -29,7 +29,7 @@ export default async (toggleLikeInput: IToggleLikeInput): Promise<IPost> => {
         }
 
         await post.save();
-        return (post.populate("author", "-password").populate("likes", "-password") as unknown) as IPost;
+        return (await post.populate("author", "-password").populate("likes", "-password").execPopulate() as unknown) as IPost;
     } catch (e) {
         throw new Error("Post not found");
     }

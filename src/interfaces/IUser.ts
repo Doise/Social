@@ -5,6 +5,7 @@ export interface IUserBase extends Document {
     email: string;
     password: string;
     status: string;
+    oneTimePassword?: number;
 }
 
 export interface IUser {

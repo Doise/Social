@@ -30,4 +30,14 @@ export default {
      * token secret key
      */
     jwrSecret: process.env.JWT_SECRET,
+
+    /**
+     * nodemailer username
+     */
+    mailUser: process.env.MAIL_USER,
+
+    /**
+     * nodemailer secret
+     */
+    mailSecret: process.env.MAIL_SECRET,
 };

@@ -23,8 +23,8 @@ export const GET_POST = gql`
 `;
 
 export const CREATE_POST = gql`
-    mutation CreatePost($createPostInput: CreatePostInput!) {
-        createPost(createPostInput: $createPostInput) {
+    mutation CreatePost($title: String!, $body: String!) {
+        createPost(title: $title, body: $body) {
             id
             title
             body
@@ -55,8 +55,8 @@ export const DELETE_POST = gql`
 `;
 
 export const TOGGLE_LIKE = gql`
-    mutation ToggleLike($toggleLikeInput: ToggleLikeInput!) {
-        toggleLike(toggleLikeInput: $toggleLikeInput) {
+    mutation ToggleLike($postId: String!) {
+        toggleLike(postId: $postId) {
             id
         }
     }
