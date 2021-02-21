@@ -52,3 +52,17 @@ export const CREATE_USER = gql`
         }
     }
 `;
+
+export const REFRESH_TOKEN = gql`
+    mutation refreshToken($token: String!) {
+        refreshToken(token: $token) {
+            user {
+                id
+                username
+                email
+                status
+            }
+            token
+        }
+    }
+`;

@@ -1,5 +1,6 @@
-import { ICreateUserInput, ILoginUserInput, IUpdateUserInput, IUserResult } from "../../../interfaces/IUser";
+import { ICreateUserInput, ILoginUserInput, IUpdateUserInput, IUser, IUserResult } from "../../../interfaces/IUser";
 import { loginUser, registerUser, updateUser } from "../../../services/auth";
+import { deserializeUser, serializeUser } from "../../../services/auth/auth";
 
 const resolver = {
     /**
@@ -44,7 +45,18 @@ const resolver = {
         return userResult;
     },
 
-    // TODO: implement refreshToken.
+    /**
+     * Refreshes the current token.
+     *
+     * @param { void } _parent Previous resolver.
+     * @param { string } token The current token.
+     * @returns { Promise<IUserResult> } The user and a fresh token.
+     */
+    refreshToken: async (_parent: void, { token }: { token: string }): Promise<IUserResult> => {
+        const user = ((await deserializeUser(token)) as unknown) as IUser;
+        const fToken = serializeUser(user.id);
+        return { user, token: fToken };
+    },
 };
 
 export default resolver;
