@@ -27,8 +27,6 @@ export const getServer = (auth? : string): ApolloServer => {
         context: async ({ req }) => {
             let token = req?.headers?.authorization || auth;
 
-            logger.info(token);
-
             if (!token) {
                 return { user: null };
             }

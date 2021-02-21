@@ -1,9 +1,11 @@
+/* eslint jest/no-disabled-tests: "off" */
 import { createTestClient } from "apollo-server-testing";
 import { ICreateUserInput, IUser } from "../../../../interfaces/IUser";
 import registerUser from "../../../../services/auth/registerUser";
+import logger from "../../../../utils/logger";
 import { getServer } from "../../../../utils/server";
 import setupUsersDatabase from "../../../services/auth/setup";
-import { CREATE_USER, GET_USER, LOGIN_USER, UPDATE_USER } from "./queries";
+import { CREATE_USER, GET_USER, LOGIN_USER, REFRESH_TOKEN, UPDATE_USER } from "./queries";
 
 setupUsersDatabase("testDatabase");
 
@@ -106,5 +108,24 @@ describe("graphql.user", () => {
         expect(data.createUser.user.status).toBe("");
         expect(data.createUser.user.email).toBe("steve@gmail.com");
         expect(data.createUser.token.length).toBeGreaterThan(20);
+    });
+
+    it("sould refresh the token", async () => {
+        const server = getServer();
+
+        const { mutate } = createTestClient(server);
+
+        const { data, errors } = await mutate({
+            mutation: REFRESH_TOKEN,
+            variables: {
+                token
+            },
+        });
+
+        logger.error(JSON.stringify(errors, null, "\t"));
+        logger.info(JSON.stringify(data, null, "\t"));
+
+        expect(data.refreshToken.token.length).toBeGreaterThan(20);
+        expect(data.refreshToken.token).not.toStrictEqual(token);
     });
 });

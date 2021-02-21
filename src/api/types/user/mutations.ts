@@ -20,6 +20,6 @@ export default gql`
         # """
         # Generates a fresh jsonwebtoken from a token.
         # """
-        # refreshToken(token: String!): UserResult!
+        refreshToken(token: String!): UserResult!
     }
 `;
